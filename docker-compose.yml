@@ -1,0 +1,30 @@
+version: "3"
+services:
+  ph3:
+    image: ph3
+    build:
+      context: .
+      dockerfile: ph3
+  ph2:
+    image: ph2
+    build:
+      context: .
+      dockerfile: ph2
+  njs:
+    image: njs
+    build:
+      context: .
+      dockerfile: njs
+  caller:
+    image: caller
+    build:
+      context: .
+      dockerfile: caller
+    depends_on:
+    - ph2
+    - ph3
+    - njs
+    links:
+    - ph2:ph2
+    - ph3:ph3
+    - njs:njs
